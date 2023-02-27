@@ -1,0 +1,69 @@
+<app-navbar></app-navbar>
+
+
+<ng-container *ngIf="this._listinfousers.length >= 10; else elseTemplate">
+  <div class="row m-2">
+    <h1>Informes de usuarios</h1>
+    <hr>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
+          <div class="card-header">Nombres de personas registradas:</div>
+          <div class="card-body" style="text-align: center;">
+            <ul class="list-group list-group-flush" *ngFor="let infouser of _listinfousers">
+              <h6 class="card-title">{{infouser.name}} {{infouser.second_name}} {{infouser.last_name}}
+                {{infouser.second_last_name}}</h6>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row">
+          <div class="card text-white bg-dark mb-3 me-2" style="max-width: 18rem;">
+            <div class="card-header">Cantidad de mujeres:</div>
+            <div class="card-body" style="text-align: center;">
+              <i class="fa-sharp fa-solid fa-person-dress" style="font-size: 60px;"></i>
+              <p class="card-text" style="font-size: 18px;">{{count_wouman}}</p>
+            </div>
+          </div>
+          <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header">Cantidad de hombres:</div>
+            <div class="card-body" style="text-align: center;">
+              <i class="fa-solid fa-person" style="font-size: 60px;"></i>
+              <p class="card-text" style="font-size: 18px;">{{count_men}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="card text-white bg-dark mb-3 me-2" style="max-width: 18rem;">
+            <div class="card-header">Promedio de edades:</div>
+            <div class="card-body" style="text-align: center;">
+              <i class="fa-solid fa-cake-candles" style="font-size: 60px;"></i>
+              <p class="card-text" style="font-size: 18px;">{{avg}}</p>
+            </div>
+          </div>
+          <div class="card text-white bg-dark mb-3 me-2" style="max-width: 18rem;">
+            <div class="card-header">Usuario con mayor edad:</div>
+            <div class="card-body" style="text-align: center;">
+              <h5 class="card-title">{{infouser.name}} {{infouser.second_name}} {{infouser.last_name}}
+                {{infouser.second_last_name}}</h5>
+              <p class="card-text" style="font-size: 18px;">Edad: {{infouser.age}}</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #elseTemplate>
+  <div class="row m-2 mt-5" style="text-align: center;">
+    <div class="card-body">
+      <h5 class="card-title text-muted">Aún no hay registrados 10 usuarios</h5>
+      <p class="card-text text-muted">Porfavor ingrese al menos 10 usuarios para mostrar los informes.</p>
+      <i class="fa-solid fa-lock text-muted" style="font-size: 120px"></i>
+    </div>
+  </div>
+</ng-template>

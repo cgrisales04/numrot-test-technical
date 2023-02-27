@@ -1,0 +1,154 @@
+<app-navbar></app-navbar>
+<div class="row m-2">
+  <h2 class="mb-3">Formulario de Info usuarios</h2>
+  <hr>
+
+  <div class="col-md-6">
+    <form [formGroup]="formInfousers" (ngSubmit)="swhicheAccion()">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="txtIdentificacion" class="form-label">Identificación:</label>
+          <input type="number" formControlName="identification" class="form-control" id="txtIdentificacion">
+          <div *ngIf="isValid('identification')" class="form-text text-danger">
+            El campo de identificación es obligatorio.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="txtPassword" class="form-label">Contraseña:</label>
+          <input type="password" formControlName="password" class="form-control" id="txtPassword">
+          <div *ngIf="isValid('password')" class="form-text text-danger">
+            El campo de contraseña es obligatorio.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label for="txtPrimerNombre" class="form-label">Primer nombre:</label>
+          <input type="text" formControlName="name" class="form-control" id="txtPrimerNombre">
+          <div *ngIf="isValid('name')" class="form-text text-danger">
+            El campo de primer nombre es obligatorio.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="txtSegundoNombre" class="form-label">Segundo nombre:</label>
+          <input type="text" formControlName="second_name" class="form-control" id="txtSegundoNombre">
+          <div *ngIf="isValid('second_name')" class="form-text text-danger">
+            El campo de segundo nombre es obligatorio.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label for="txtPrimerApellido" class="form-label">Primer apellido:</label>
+          <input type="text" formControlName="last_name" class="form-control" id="txtPrimerApellido">
+          <div *ngIf="isValid('last_name')" class="form-text text-danger">
+            El campo de primer Apellido es obligatorio.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="txtSegundoApellido" class="form-label">Segundo apellido:</label>
+          <input type="text" formControlName="second_last_name" class="form-control" id="txtSegundoApellido">
+          <div *ngIf="isValid('second_last_name')" class="form-text text-danger">
+            El campo de segundo apellido es obligatorio.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label for="txtTelefono" class="form-label">Telefono:</label>
+          <input type="number" formControlName="phone" class="form-control" id="txtTelefono">
+          <div *ngIf="isValid('phone')" class="form-text text-danger">
+            El campo de telefono es obligatorio.
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="txtEmail" class="form-label">Email:</label>
+          <input type="text" formControlName="email" class="form-control" id="txtEmail">
+          <div *ngIf="isValid('email')" class="form-text text-danger">
+            El campo de email es obligatorio.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label for="txtDireccion" class="form-label">Dirección:</label>
+          <input type="text" formControlName="address" class="form-control" id="txtDireccion">
+          <div *ngIf="isValid('address')" class="form-text text-danger">
+            El campo de dirección es obligatorio.
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="txtEdad" class="form-label">Edad:</label>
+          <input type="number" formControlName="age" class="form-control" id="txtEdad">
+          <div *ngIf="isValid('age')" class="form-text text-danger">
+            El campo de debe ser minimo de 3 digitos y/o es obligatorio.
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <label for="txtGeneros" class="form-label">Generos:</label><br>
+          <select class="form-select" formControlName="GenderId">
+            <option value="0" disabled selected>Generos</option>
+            <option *ngFor="let gender of this._genders" [value]="gender.gender_id">
+              {{gender.name}}</option>
+          </select>
+          <div *ngIf="isValid('GenderId')" class="form-text text-danger">
+            El campo del genero es obligatorio.
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="txtTypeUser" class="form-label">Tipo de usuario:</label><br>
+          <select class="form-select" formControlName="TypeUserId">
+            <option value="0" disabled selected>Tipo de usuario</option>
+            <option *ngFor="let typeUser of this._typeUsers" [value]="typeUser.type_user_id">
+              {{typeUser.name}}</option>
+          </select>
+          <div *ngIf="isValid('TypeUserId')" class="form-text text-danger">
+            El campo del tipo de usuario es obligatorio.
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success me-2" [disabled]="formInfousers.invalid">{{this.accion}}</button>
+      <span class="btn btn-danger" (click)="cancelar()">Cancelar</span>
+    </form>
+  </div>
+  <div class="col-md-6" style="height: 550px !important;
+  overflow-x: auto;">
+    <table class="table table-dark">
+      <caption>Lista de usuarios.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Identificación</th>
+          <th scope="col">Nombre completo</th>
+          <th scope="col">Direccion</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let infouser of this._listinfousers">
+          <th>{{infouser.identification}}</th>
+          <th>{{infouser.name}} {{infouser.second_name}} {{infouser.last_name}}
+            {{infouser.second_last_name}}</th>
+          <th>{{infouser.address}}</th>
+          <th>{{infouser.phone}}</th>
+          <th>
+            <i class="fa-solid fa-pen me-2" style="cursor: pointer" (click)="findById(infouser.info_user_id)"></i>
+            <i class="fa-solid fa-trash me-2" style="cursor: pointer" (click)="delete(infouser.info_user_id)"></i>
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
