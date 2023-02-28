@@ -117,7 +117,6 @@
           </div>
         </div>
       </div>
-
       <button type="submit" class="btn btn-success me-2" [disabled]="formInfousers.invalid">{{this.accion}}</button>
       <span class="btn btn-danger" (click)="cancelar()">Cancelar</span>
     </form>
@@ -145,7 +144,7 @@
           <th>
             <i class="fa-solid fa-pen me-2" style="cursor: pointer" (click)="findById(infouser.info_user_id)"></i>
             <i class="fa-solid fa-trash me-2" style="cursor: pointer" (click)="delete(infouser.info_user_id)"></i>
-            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <i class="fa-solid fa-file-invoice-dollar" style="cursor: pointer" routerLink="/invoices/{{infouser.info_user_id}}"></i>
           </th>
         </tr>
       </tbody>

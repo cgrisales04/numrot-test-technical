@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+<div class="row m-2">
+  <h2 class="mb-3">Formulario de facturas</h2>
+  <hr>
+
+  <div class="col-md-6">
+    <form [formGroup]="formInvoices" (ngSubmit)="save()">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="txtValue" class="form-label">Valor total:</label>
+          <input type="number" formControlName="value_totally" class="form-control" id="txtValue">
+          <div *ngIf="isValid('value_totally')" class="form-text text-danger">
+            El campo del valor total es obligatorio.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="txtTypeUser" class="form-label">Usuario:</label><br>
+          <select class="form-select" formControlName="infoUserId">
+            <option value="0" disabled selected>Seleccionar usuario</option>
+            <option *ngFor="let user of this._listUsers" [value]="user.info_user_id">
+              {{user.name}} {{user.second_name}} {{user.last_name}} {{user.second_last_name}}</option>
+          </select>
+          <div *ngIf="isValid('infoUserId')" class="form-text text-danger">
+            El campo del usuario es obligatorio.
+          </div>
+        </div>
+      </div>
+      <div class="mt-2">
+        <button type="submit" class="btn btn-success me-2" [disabled]="formInvoices.invalid">Guardar</button>
+        <span class="btn btn-danger" (click)="cancelar()">Cancelar</span>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6" style="height: 550px !important;
+  overflow-x: auto;">
+    <table class="table table-dark">
+      <caption>Lista de facturas.</caption>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Valor total</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let invoice of this._listInvoices">
+          <th>{{invoice.invoice_id}}</th>
+          <th>{{findByInfoUserId(invoice.infoUserId)}}</th>
+          <th>{{invoice.date_issue}}</th>
+          <th>${{invoice.value_totally}}</th>
+          <th>
+            <i class="fa-solid fa-trash me-2" style="cursor: pointer" (click)="delete(invoice.invoice_id)"></i>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

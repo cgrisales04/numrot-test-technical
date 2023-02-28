@@ -1,0 +1,94 @@
+<app-navbar></app-navbar>
+<div class="row m-2">
+  <div class="d-flex flex-row justify-content-between">
+    <h2 class="mb-3">Facturas del usuario </h2>
+    <i class="fa-solid fa-left-long" style="cursor: pointer;font-size: 40px;" routerLink="/infousers"></i>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
+        <div class="card-header">Usuario seleccionado: <strong>{{_infouserSelected.name}}
+            {{_infouserSelected.second_name}}
+            {{_infouserSelected.last_name}} {{_infouserSelected.second_last_name}}</strong></div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <div class="row">
+              <div class="col-md-4">
+                <h6 class="card-title">Identificación: </h6>
+                <p>{{_infouserSelected.identification}}</p>
+              </div>
+              <div class="col-md-4">
+                <h6 class="card-title">Password: </h6>
+                <p>{{_infouserSelected.password}}</p>
+              </div>
+              <div class="col-md-4">
+                <h6 class="card-title">Telefono: </h6>
+                <p>{{_infouserSelected.phone}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <h6 class="card-title">Genero: </h6>
+                <p>{{_infouserSelected.gender.name}}</p>
+              </div>
+              <div class="col-md-4">
+                <h6 class="card-title">Pefil: </h6>
+                <p>{{_infouserSelected.typeUser.name}}</p>
+              </div>
+              <div class="col-md-3">
+                <h6 class="card-title">Edad: </h6>
+                <p>{{_infouserSelected.age}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h6 class="card-title">Email: </h6>
+                <p>{{_infouserSelected.email}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h6 class="card-title">Dirección: </h6>
+                <p>{{_infouserSelected.address}}</p>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <ng-container *ngIf="_invoices.length > 0; else elseTemplate">
+        <div class="accordion mb-1" id="accordionPanelsStayOpenExample"
+          *ngFor="let invoice of _invoices; let i = index">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne-{{i}}">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                attr.data-bs-target="#panelsStayOpen-collapseOne-{{i}}"
+                attr.aria-controls="panelsStayOpen-collapseOne-{{i}}">
+                Factura #{{i}}
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne-{{i}}" class="accordion-collapse collapse"
+              attr.aria-labelledby="panelsStayOpen-headingOne-{{i}}">
+              <div class="accordion-body">
+                <strong>Total:</strong> ${{invoice.value_totally}} <br>
+                <strong>Fecha de compra:</strong> {{invoice.date_issue}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <div class="row m-2" style="text-align: center;">
+          <div class="card-body">
+            <h5 class="card-title text-muted">Aún no hay facturas</h5>
+            <p class="card-text text-muted">Porfavor registre facturas para este usuario.</p>
+            <i class="fa-solid fa-lock text-muted" style="font-size: 120px"></i>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

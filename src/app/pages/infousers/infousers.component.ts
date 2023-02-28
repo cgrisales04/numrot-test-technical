@@ -56,7 +56,7 @@ export class InfousersComponent implements OnInit {
     phone: ['', [Validators.maxLength(12)]],
     email: ['', [Validators.maxLength(120)]],
     address: ['', [Validators.required]],
-    age: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(3)]],
+    age: ['', [Validators.required, Validators.maxLength(3)]],
     TypeUserId: ['', [Validators.required]],
     GenderId: ['', [Validators.required]]
   })
@@ -103,7 +103,7 @@ export class InfousersComponent implements OnInit {
           return response.status;
         }
         this.formInfousers.reset();
-        this.sweetAlert.alertModal('error', "No se puede eliminar el parque porque tiene una dependencia y/o no existe")
+        this.sweetAlert.alertModal('error', "No se puede eliminar el usuario porque tiene una dependencia y/o no existe")
         return response.status;
       })
   }

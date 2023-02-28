@@ -1,3 +1,13 @@
+
+export interface Invoice {
+  invoice_id:    number;
+  date_issue:    Date;
+  value_totally: number;
+  infoUserId:    number;
+}
+export interface InvoiceList extends Array<Invoice>{}
+
+
 export interface Response {
   status:  boolean;
   message: string;
